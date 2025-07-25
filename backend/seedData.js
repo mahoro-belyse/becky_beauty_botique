@@ -176,8 +176,7 @@ async function seedDatabase() {
   try {
     await mongoose.connect(
       process.env.MONGODB_URI ||
-        "mongodb+srv://mahorobelyse1:becky12345@cluster0.fwrh6ub.mongodb.net/becky beauty botique?retryWrites=true&w=majority&appName=Cluster0"
-      //localhost:27017/becky-beauty"
+        "mongodb+srv://mahorobelyse1:becky12345@cluster0.fwrh6ub.mongodb.net/beckybeautybotique?retryWrites=true&w=majority&appName=Cluster0"
     );
     // Clear existing products
     mongodb: await Product.deleteMany({});
