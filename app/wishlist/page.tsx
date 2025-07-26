@@ -1,94 +1,95 @@
-"use client"
+"use client";
+export const dynamic = "force-dynamic";
 
-import { useState, useEffect } from "react"
-import { useAuth } from "@/contexts/AuthContext"
-import { useCart } from "@/contexts/CartContext"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { useToast } from "@/hooks/use-toast"
-import { Heart, ShoppingBag, Trash2, Star } from "lucide-react"
-import { apiClient } from "@/lib/api"
-import Image from "next/image"
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useCart } from "@/contexts/CartContext";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { Heart, ShoppingBag, Trash2, Star } from "lucide-react";
+import { apiClient } from "@/lib/api";
+import Image from "next/image";
+import Link from "next/link";
 
 interface WishlistItem {
   product: {
-    _id: string
-    name: string
-    price: number
-    originalPrice?: number
-    images: string[]
-    rating: number
-    reviewCount: number
-    discount?: number
-    category: string
-    brand: string
-    stock: number
-  }
-  addedAt: string
+    _id: string;
+    name: string;
+    price: number;
+    originalPrice?: number;
+    images: string[];
+    rating: number;
+    reviewCount: number;
+    discount?: number;
+    category: string;
+    brand: string;
+    stock: number;
+  };
+  addedAt: string;
 }
 
 export default function WishlistPage() {
-  const { user } = useAuth()
-  const { addToCart } = useCart()
-  const { toast } = useToast()
-  const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([])
-  const [loading, setLoading] = useState(true)
-  const [mounted, setMounted] = useState(false)
+  const { user } = useAuth();
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+  const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (user && mounted) {
-      fetchWishlist()
+      fetchWishlist();
     }
-  }, [user, mounted])
+  }, [user, mounted]);
 
   useEffect(() => {
     if (mounted) {
       // Listen for real-time wishlist updates
       apiClient.onWishlistUpdate((wishlist) => {
-        setWishlistItems(wishlist.products)
-      })
+        setWishlistItems(wishlist.products);
+      });
     }
-  }, [mounted])
+  }, [mounted]);
 
   const fetchWishlist = async () => {
     try {
-      setLoading(true)
-      const data = await apiClient.getWishlist()
-      setWishlistItems(data.products)
+      setLoading(true);
+      const data = await apiClient.getWishlist();
+      setWishlistItems(data.products);
     } catch (error: any) {
       toast({
         title: "Error",
         description: "Failed to load wishlist",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleRemoveFromWishlist = async (productId: string) => {
     try {
-      await apiClient.removeFromWishlist(productId)
+      await apiClient.removeFromWishlist(productId);
       toast({
         title: "Removed from Wishlist",
         description: "Item has been removed from your wishlist",
-      })
+      });
     } catch (error: any) {
       toast({
         title: "Error",
         description: error.message,
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const handleAddToCart = async (product: any) => {
     if (product.stock === 0) {
@@ -96,12 +97,12 @@ export default function WishlistPage() {
         title: "Out of Stock",
         description: "This item is currently out of stock",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
     try {
-      await apiClient.addToCart(product._id, 1)
+      await apiClient.addToCart(product._id, 1);
 
       // Also add to local cart context for immediate UI update
       addToCart({
@@ -110,20 +111,20 @@ export default function WishlistPage() {
         price: product.price,
         image: product.images[0],
         quantity: 1,
-      })
+      });
 
       toast({
         title: "Added to Cart! ✨",
         description: `${product.name} has been added to your cart`,
-      })
+      });
     } catch (error: any) {
       toast({
         title: "Error",
         description: error.message,
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   if (!mounted) {
     return (
@@ -137,11 +138,11 @@ export default function WishlistPage() {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
   if (!user) {
-    return null
+    return null;
   }
 
   if (loading) {
@@ -156,7 +157,7 @@ export default function WishlistPage() {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -170,15 +171,21 @@ export default function WishlistPage() {
             <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <Heart className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-display font-bold text-gray-800 mb-2">My Wishlist</h1>
+            <h1 className="text-4xl font-display font-bold text-gray-800 mb-2">
+              My Wishlist
+            </h1>
             <p className="text-gray-600">Your saved beauty favorites</p>
           </div>
 
           {wishlistItems.length === 0 ? (
             <div className="text-center py-16">
               <Heart className="w-24 h-24 text-gray-400 mx-auto mb-6" />
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Wishlist is Empty</h2>
-              <p className="text-gray-600 mb-8">Save your favorite beauty products to buy them later</p>
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                Your Wishlist is Empty
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Save your favorite beauty products to buy them later
+              </p>
               <Button asChild className="btn-luxury text-white">
                 <Link href="/products">Discover Products</Link>
               </Button>
@@ -187,16 +194,17 @@ export default function WishlistPage() {
             <>
               <div className="flex items-center justify-between mb-8">
                 <p className="text-gray-600">
-                  {wishlistItems.length} item{wishlistItems.length !== 1 ? "s" : ""} in your wishlist
+                  {wishlistItems.length} item
+                  {wishlistItems.length !== 1 ? "s" : ""} in your wishlist
                 </p>
                 <Button
                   variant="outline"
                   onClick={() => {
                     wishlistItems.forEach((item) => {
                       if (item.product.stock > 0) {
-                        handleAddToCart(item.product)
+                        handleAddToCart(item.product);
                       }
-                    })
+                    });
                   }}
                   className="bg-transparent"
                 >
@@ -220,7 +228,9 @@ export default function WishlistPage() {
 
                     {/* Stock Badge */}
                     {item.product.stock === 0 && (
-                      <Badge className="absolute top-4 right-4 z-10 bg-gray-500 text-white">Out of Stock</Badge>
+                      <Badge className="absolute top-4 right-4 z-10 bg-gray-500 text-white">
+                        Out of Stock
+                      </Badge>
                     )}
 
                     {/* Remove Button */}
@@ -237,7 +247,10 @@ export default function WishlistPage() {
                       {/* Product Image */}
                       <div className="relative aspect-square overflow-hidden bg-gray-100">
                         <Image
-                          src={item.product.images[0] || "/placeholder.svg?height=400&width=400"}
+                          src={
+                            item.product.images[0] ||
+                            "/placeholder.svg?height=400&width=400"
+                          }
                           alt={item.product.name}
                           fill
                           className="object-cover transition-all duration-500 group-hover:scale-110"
@@ -248,7 +261,9 @@ export default function WishlistPage() {
                       {/* Product Info */}
                       <div className="p-6">
                         {/* Brand */}
-                        <p className="text-sm text-gray-500 font-medium mb-1">{item.product.brand}</p>
+                        <p className="text-sm text-gray-500 font-medium mb-1">
+                          {item.product.brand}
+                        </p>
 
                         {/* Product Name */}
                         <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-gray-800 group-hover:text-pink-600 transition-colors">
@@ -262,12 +277,16 @@ export default function WishlistPage() {
                               <Star
                                 key={i}
                                 className={`w-4 h-4 ${
-                                  i < Math.floor(item.product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                                  i < Math.floor(item.product.rating)
+                                    ? "text-yellow-400 fill-current"
+                                    : "text-gray-300"
                                 }`}
                               />
                             ))}
                           </div>
-                          <span className="text-sm text-gray-500 ml-2">({item.product.reviewCount})</span>
+                          <span className="text-sm text-gray-500 ml-2">
+                            ({item.product.reviewCount})
+                          </span>
                         </div>
 
                         {/* Price */}
@@ -278,7 +297,8 @@ export default function WishlistPage() {
                             </span>
                             {item.product.originalPrice && (
                               <span className="text-sm text-gray-500 line-through">
-                                {item.product.originalPrice.toLocaleString()} RWF
+                                {item.product.originalPrice.toLocaleString()}{" "}
+                                RWF
                               </span>
                             )}
                           </div>
@@ -291,7 +311,9 @@ export default function WishlistPage() {
                           className="w-full btn-luxury text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <ShoppingBag className="w-4 h-4 mr-2" />
-                          {item.product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+                          {item.product.stock === 0
+                            ? "Out of Stock"
+                            : "Add to Cart"}
                         </Button>
 
                         {/* Added Date */}
@@ -310,5 +332,5 @@ export default function WishlistPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
