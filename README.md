@@ -10,7 +10,6 @@ An e-commerce platform built with the MERN stack for makeup and beauty lovers. B
 
 - 🌐 Frontend:  
 - 📡 Backend: [https://becky-beauty-botique-1.onrender.com](https://becky-beauty-botique-1.onrender.com)
-- 
 ---
 
 ## 📂 Project Directory Structure
@@ -126,6 +125,7 @@ Core Features:
 
 ---
 ## 📐 Architecture Overview
+```
 Frontend (React/Vite)
 │
 ├── Pages (app directory with Next.js routing)
@@ -139,7 +139,7 @@ Backend (Express)
 ├── Middleware (auth, error handling)
 ├── Models (Mongoose schemas)
 └── Socket.io Server for notifications
-
+```
  ---
 
  ## 🧾 API Endpoints
@@ -147,15 +147,17 @@ Backend (Express)
 ```
 https://becky-beauty-api.onrender.com/api
 ```
-Method	Endpoint	Description
-GET	/products	Get all products
-POST	/products	Create new product (Admin)
-POST	/auth/register	User registration
-POST	/auth/login	User login
-GET	/cart	Get user's cart
-POST	/cart	Add to cart
-GET	/wishlist	Get wishlist items
-POST	/wishlist	Add to wishlist
+| Method | Endpoint         | Description             |
+|--------|------------------|-------------------------|
+| GET    | /products        | Get all products        |
+| POST   | /products        | Create new product (Admin) |
+| POST   | /auth/register   | User registration       |
+| POST   | /auth/login      | User login              |
+| GET    | /cart            | Get user's cart         |
+| POST   | /cart            | Add to cart             |
+| GET    | /wishlist        | Get wishlist items      |
+| POST   | /wishlist        | Add to wishlist         |
+
 
 ---
 # 🧭 Roadmap
