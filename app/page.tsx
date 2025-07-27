@@ -1,18 +1,28 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
-import ProductCard from "@/components/ProductCard"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Sparkles, Star, Heart, Award, Truck, Shield, Headphones, ArrowRight, X } from "lucide-react"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Sparkles,
+  Star,
+  Heart,
+  Award,
+  Truck,
+  Shield,
+  Headphones,
+  ArrowRight,
+  X,
+} from "lucide-react";
 
 // Mock data for products
 const featuredProducts = [
@@ -21,7 +31,7 @@ const featuredProducts = [
     name: "Luxury Velvet Matte Lipstick",
     price: 2000,
     originalPrice: 3000,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/listick.jpg?height=400&width=400",
     rating: 4.8,
     reviews: 234,
     discount: 33,
@@ -33,7 +43,7 @@ const featuredProducts = [
     name: "24K Gold Infused Foundation",
     price: 5000,
     originalPrice: 8000,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/foundatio.jpg?height=400&width=400",
     rating: 4.9,
     reviews: 189,
     discount: 38,
@@ -45,7 +55,7 @@ const featuredProducts = [
     name: "Diamond Lash Mascara",
     price: 1000,
     originalPrice: 2000,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/mascara.jpg?height=400&width=400",
     rating: 4.7,
     reviews: 156,
     discount: 50,
@@ -57,7 +67,7 @@ const featuredProducts = [
     name: "Precision Liquid Eyeliner",
     price: 2500,
     originalPrice: 5000,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/eyeliner.png?height=400&width=400",
     rating: 4.6,
     reviews: 98,
     discount: 50,
@@ -69,7 +79,7 @@ const featuredProducts = [
     name: "Silk Touch Blush Palette",
     price: 5000,
     originalPrice: 10000,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/blush.jpg?height=400&width=400",
     rating: 4.8,
     reviews: 145,
     discount: 50,
@@ -80,75 +90,78 @@ const featuredProducts = [
     id: "6",
     name: "Professional Makeup Mirror",
     price: 10000,
-    image: "/placeholder.svg?height=400&width=400",
+    image: "/mirror.jpg?height=400&width=400",
     rating: 4.9,
     reviews: 87,
     category: "Tools",
     brand: "AlisoRwanda",
   },
-]
+];
 
 const brands = [
   { name: "Fenty Beauty", logo: "/placeholder.svg?height=80&width=120" },
   { name: "Her Majesty", logo: "/placeholder.svg?height=80&width=120" },
   { name: "Glow Queenz", logo: "/placeholder.svg?height=80&width=120" },
   { name: "AlisoRwanda", logo: "/placeholder.svg?height=80&width=120" },
-]
+];
 
 const galleryImages = [
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-  "/placeholder.svg?height=300&width=300",
-]
+  "/glowingskin1.jpg?height=300&width=300",
+  "/glowingskin2.jpg?height=300&width=300",
+  "/glowingskin3.jpg?height=300&width=300",
+  "/glowingskin4.jpg?height=300&width=300",
+  "/glowingskin5.jpg?height=300&width=300",
+  "/glowingskin7.jpg?height=300&width=300",
+  "/glowingskin11.jpeg?height=300&width=300",
+  "/images21.jpeg?height=300&width=300",
+];
 
 const testimonials = [
   {
     name: "Sarah Johnson",
     rating: 5,
-    comment: "Absolutely love the quality! The lipstick stays on all day and the colors are gorgeous.",
+    comment:
+      "Absolutely love the quality! The lipstick stays on all day and the colors are gorgeous.",
     image: "/placeholder.svg?height=60&width=60",
   },
   {
     name: "Marie Claire",
     rating: 5,
-    comment: "Best foundation I've ever used. Perfect coverage and feels so lightweight.",
+    comment:
+      "Best foundation I've ever used. Perfect coverage and feels so lightweight.",
     image: "/placeholder.svg?height=60&width=60",
   },
   {
     name: "Emma Wilson",
     rating: 5,
-    comment: "Fast delivery and amazing customer service. Will definitely order again!",
+    comment:
+      "Fast delivery and amazing customer service. Will definitely order again!",
     image: "/placeholder.svg?height=60&width=60",
   },
-]
+];
 
 export default function HomePage() {
-  const [showNewsletter, setShowNewsletter] = useState(false)
-  const [email, setEmail] = useState("")
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [showNewsletter, setShowNewsletter] = useState(false);
+  const [email, setEmail] = useState("");
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowNewsletter(true), 5000)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(() => setShowNewsletter(true), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setShowNewsletter(false)
-    setEmail("")
-  }
+    e.preventDefault();
+    setShowNewsletter(false);
+    setEmail("");
+  };
 
   return (
     <div className="min-h-screen">
@@ -186,11 +199,16 @@ export default function HomePage() {
             </h1>
 
             <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed fade-in-up stagger-2">
-              Elevate your beauty routine with our curated collection of premium cosmetics and luxury beauty essentials
+              Elevate your beauty routine with our curated collection of premium
+              cosmetics and luxury beauty essentials
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-up stagger-3">
-              <Button asChild size="lg" className="btn-luxury text-white px-8 py-4 text-lg font-medium">
+              <Button
+                asChild
+                size="lg"
+                className="btn-luxury text-white px-8 py-4 text-lg font-medium"
+              >
                 <Link href="/products">
                   Shop Collection
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -237,10 +255,26 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { icon: Truck, title: "Free Shipping", desc: "On orders over 50,000 RWF" },
-              { icon: Shield, title: "Secure Payment", desc: "100% secure transactions" },
-              { icon: Award, title: "Premium Quality", desc: "Authentic luxury products" },
-              { icon: Headphones, title: "24/7 Support", desc: "Expert beauty consultants" },
+              {
+                icon: Truck,
+                title: "Free Shipping",
+                desc: "On orders over 50,000 RWF",
+              },
+              {
+                icon: Shield,
+                title: "Secure Payment",
+                desc: "100% secure transactions",
+              },
+              {
+                icon: Award,
+                title: "Premium Quality",
+                desc: "Authentic luxury products",
+              },
+              {
+                icon: Headphones,
+                title: "24/7 Support",
+                desc: "Expert beauty consultants",
+              },
             ].map((feature, index) => (
               <div key={index} className="text-center group">
                 <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -258,16 +292,24 @@ export default function HomePage() {
       <section className="section-padding bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-pink-100 text-pink-600 border-pink-200">✨ Bestsellers</Badge>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-6">Featured Products</h2>
+            <Badge className="mb-4 bg-pink-100 text-pink-600 border-pink-200">
+              ✨ Bestsellers
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-6">
+              Featured Products
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Discover our most loved beauty essentials, carefully selected for their exceptional quality and results
+              Discover our most loved beauty essentials, carefully selected for
+              their exceptional quality and results
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {featuredProducts.slice(0, 6).map((product, index) => (
-              <div key={product.id} className={`fade-in-up stagger-${(index % 3) + 1}`}>
+              <div
+                key={product.id}
+                className={`fade-in-up stagger-${(index % 3) + 1}`}
+              >
                 <ProductCard product={product} />
               </div>
             ))}
@@ -293,8 +335,12 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold text-gray-800 mb-6">Trusted by Leading Brands</h2>
-            <p className="text-xl text-gray-600">We partner with the world's most prestigious beauty brands</p>
+            <h2 className="text-4xl font-display font-bold text-gray-800 mb-6">
+              Trusted by Leading Brands
+            </h2>
+            <p className="text-xl text-gray-600">
+              We partner with the world's most prestigious beauty brands
+            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
@@ -320,16 +366,24 @@ export default function HomePage() {
       <section className="section-padding bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-purple-100 text-purple-600 border-purple-200">💄 Inspiration</Badge>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-6">Beauty Gallery</h2>
+            <Badge className="mb-4 bg-purple-100 text-purple-600 border-purple-200">
+              💄 Inspiration
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-6">
+              Beauty Gallery
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Get inspired by stunning makeup looks and beauty transformations from our community
+              Get inspired by stunning makeup looks and beauty transformations
+              from our community
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {galleryImages.map((image, index) => (
-              <div key={index} className="relative aspect-square overflow-hidden rounded-2xl group cursor-pointer">
+              <div
+                key={index}
+                className="relative aspect-square overflow-hidden rounded-2xl group cursor-pointer"
+              >
                 <Image
                   src={image || "/placeholder.svg"}
                   alt={`Gallery ${index + 1}`}
@@ -364,8 +418,12 @@ export default function HomePage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold text-gray-800 mb-6">What Our Customers Say</h2>
-            <p className="text-xl text-gray-600">Join thousands of satisfied customers who trust Becky Beauty</p>
+            <h2 className="text-4xl font-display font-bold text-gray-800 mb-6">
+              What Our Customers Say
+            </h2>
+            <p className="text-xl text-gray-600">
+              Join thousands of satisfied customers who trust Becky Beauty
+            </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
@@ -373,9 +431,14 @@ export default function HomePage() {
               <Card className="border-0 shadow-xl bg-gradient-to-br from-pink-50 to-purple-50">
                 <CardContent className="p-12 text-center">
                   <div className="flex justify-center mb-6">
-                    {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-                    ))}
+                    {[...Array(testimonials[currentTestimonial].rating)].map(
+                      (_, i) => (
+                        <Star
+                          key={i}
+                          className="w-6 h-6 text-yellow-400 fill-current"
+                        />
+                      )
+                    )}
                   </div>
 
                   <blockquote className="text-2xl font-medium text-gray-800 mb-8 leading-relaxed">
@@ -384,14 +447,19 @@ export default function HomePage() {
 
                   <div className="flex items-center justify-center">
                     <Image
-                      src={testimonials[currentTestimonial].image || "/placeholder.svg"}
+                      src={
+                        testimonials[currentTestimonial].image ||
+                        "/placeholder.svg"
+                      }
                       alt={testimonials[currentTestimonial].name}
                       width={60}
                       height={60}
                       className="rounded-full mr-4"
                     />
                     <div>
-                      <p className="font-semibold text-lg">{testimonials[currentTestimonial].name}</p>
+                      <p className="font-semibold text-lg">
+                        {testimonials[currentTestimonial].name}
+                      </p>
                       <p className="text-gray-600">Verified Customer</p>
                     </div>
                   </div>
@@ -405,7 +473,9 @@ export default function HomePage() {
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
                     className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentTestimonial ? "bg-pink-500" : "bg-gray-300"
+                      index === currentTestimonial
+                        ? "bg-pink-500"
+                        : "bg-gray-300"
                     }`}
                   />
                 ))}
@@ -432,9 +502,12 @@ export default function HomePage() {
 
               <div className="text-center mb-6">
                 <Sparkles className="w-12 h-12 text-pink-500 mx-auto mb-4" />
-                <h3 className="text-2xl font-display font-bold text-gray-800 mb-2">Get Beauty Insider Access! ✨</h3>
+                <h3 className="text-2xl font-display font-bold text-gray-800 mb-2">
+                  Get Beauty Insider Access! ✨
+                </h3>
                 <p className="text-gray-600">
-                  Subscribe for exclusive offers, beauty tips, and early access to new collections
+                  Subscribe for exclusive offers, beauty tips, and early access
+                  to new collections
                 </p>
               </div>
 
@@ -447,7 +520,10 @@ export default function HomePage() {
                   className="border-pink-200 focus:border-pink-400 focus:ring-pink-200"
                   required
                 />
-                <Button type="submit" className="w-full btn-luxury text-white font-medium">
+                <Button
+                  type="submit"
+                  className="w-full btn-luxury text-white font-medium"
+                >
                   Join the Beauty Club
                 </Button>
               </form>
@@ -462,5 +538,5 @@ export default function HomePage() {
 
       <Footer />
     </div>
-  )
+  );
 }
