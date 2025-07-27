@@ -72,7 +72,7 @@ const featuredProducts = [
     reviews: 98,
     discount: 50,
     category: "Eyes",
-    brand: "AlisoRwanda",
+    brand: "AllsoRwanda",
   },
   {
     id: "5",
@@ -94,7 +94,7 @@ const featuredProducts = [
     rating: 4.9,
     reviews: 87,
     category: "Tools",
-    brand: "AlisoRwanda",
+    brand: "AllsoRwanda",
   },
 ];
 
@@ -396,20 +396,6 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="bg-transparent border-purple-300 text-purple-600 hover:bg-purple-50"
-            >
-              <Link href="/gallery">
-                View Full Gallery
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>
