@@ -105,7 +105,7 @@ export default function Footer() {
                 { name: "Order Tracking", href: "/orders" },
                 { name: "Shipping Info", href: "/shipping" },
                 { name: "Returns & Exchanges", href: "/returns" },
-                { name: "Size Guide", href: "/size-guide" },
+                { name: "Find Your Fit", href: "/FindYourFit" },
                 { name: "FAQ", href: "/faq" },
               ].map((link) => (
                 <li key={link.name}>
