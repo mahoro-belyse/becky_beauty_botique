@@ -122,21 +122,21 @@ const testimonials = [
     rating: 5,
     comment:
       "Absolutely love the quality! The lipstick stays on all day and the colors are gorgeous.",
-    image: "/placeholder.svg?height=60&width=60",
+    image: "/person1.jpg?height=60&width=60",
   },
   {
     name: "Marie Claire",
     rating: 5,
     comment:
       "Best foundation I've ever used. Perfect coverage and feels so lightweight.",
-    image: "/placeholder.svg?height=60&width=60",
+    image: "/person2.jpg?height=60&width=60",
   },
   {
     name: "Emma Wilson",
     rating: 5,
     comment:
       "Fast delivery and amazing customer service. Will definitely order again!",
-    image: "/placeholder.svg?height=60&width=60",
+    image: "/person3.jpg?height=60&width=60",
   },
 ];
 
@@ -209,7 +209,7 @@ export default function HomePage() {
                 size="lg"
                 className="btn-luxury text-white px-8 py-4 text-lg font-medium"
               >
-                <Link href="/products">
+                <Link href="#products">
                   Shop Collection
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
@@ -220,7 +220,7 @@ export default function HomePage() {
                 size="lg"
                 className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg backdrop-blur-sm"
               >
-                <Link href="/gallery">View Gallery</Link>
+                <Link href="#gallery">View Gallery</Link>
               </Button>
             </div>
 
@@ -289,7 +289,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50 " id="products">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-pink-100 text-pink-600 border-pink-200">
@@ -332,7 +332,7 @@ export default function HomePage() {
       </section>
 
       {/* Brands Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white" id="brands">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display font-bold text-gray-800 mb-6">
@@ -363,7 +363,7 @@ export default function HomePage() {
       </section>
 
       {/* Gallery Section */}
-      <section className="section-padding bg-gray-50">
+      <section className="section-padding bg-gray-50" id="gallery">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-purple-100 text-purple-600 border-purple-200">

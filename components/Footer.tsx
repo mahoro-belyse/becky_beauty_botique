@@ -76,10 +76,10 @@ export default function Footer() {
             <ul className="space-y-3">
               {[
                 { name: "Home", href: "/" },
-                { name: "Products", href: "/products" },
-                { name: "Brands", href: "/brands" },
-                { name: "Gallery", href: "/gallery" },
-                { name: "About Us", href: "/about" },
+                { name: "Products", href: "#products" },
+                { name: "Brands", href: "#brands" },
+                { name: "Gallery", href: "#gallery" },
+
                 { name: "Contact", href: "/contact" },
               ].map((link) => (
                 <li key={link.name}>
@@ -132,7 +132,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-pink-400 flex-shrink-0" />
-                <span className="text-gray-300">beckybeautybotique@gmail.com</span>
+                <span className="text-gray-300">
+                  beckybeautybotique@gmail.com
+                </span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="w-4 h-4 text-pink-400 flex-shrink-0" />
