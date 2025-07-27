@@ -102,7 +102,7 @@ const brands = [
   { name: "Fenty Beauty", logo: "/placeholder.svg?height=80&width=120" },
   { name: "Her Majesty", logo: "/placeholder.svg?height=80&width=120" },
   { name: "Glow Queenz", logo: "/placeholder.svg?height=80&width=120" },
-  { name: "AlisoRwanda", logo: "/placeholder.svg?height=80&width=120" },
+  { name: "AllsoRwanda", logo: "/placeholder.svg?height=80&width=120" },
 ];
 
 const galleryImages = [
