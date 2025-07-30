@@ -7,8 +7,7 @@ An e-commerce platform built with the MERN stack for makeup and beauty lovers. B
 ---
 
 ## 🚀 Live Demo
-
-- 🌐 Frontend:  
+ 
 - 📡 Backend: [https://becky-beauty-botique-1.onrender.com](https://becky-beauty-botique-1.onrender.com)
 ---
 
